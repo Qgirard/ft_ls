@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:20:33 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 00:19:23 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 00:31:53 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		l_option(t_info *stock, t_elem **ptr)
 	{
 		path = ft_strjoin((*ptr)->name_dir, "/");
 		path = ft_strjoinf(path, (*ptr)->name, 1);
+		ret = get_timestamp(path);
 	}
 	if (*ptr && ((ft_strncmp((*ptr)->name, ".", 1)
 	|| ((*ptr)->name_dir && !ft_strcmp((*ptr)->name_dir, ".") && (*ptr)->prev))
