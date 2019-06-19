@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 13:59:49 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/14 04:57:25 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 05:02:40 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,22 @@ int		checkargs(char *str, t_info *stock)
 	int		i;
 
 	i = 1;
-	if (str[0] == '-')
+	if (str[0] == '-' && str[1])
 	{
+		if (str[1] == '-')
+			return (1);
 		while (str[i])
 		{
 			if (!stockinfos(stock, str[i]))
 				return (0);
 			i++;
 		}
+	}
+	else
+	{
+		stock->less = 1;
+		usage_false_dir(str);
+		ft_putchar('\n');
 	}
 	return (1);
 }
@@ -37,6 +45,8 @@ int		initializeinfos(t_info *stock)
 	stock->r = 0;
 	stock->t = 0;
 	stock->j = 0;
+	stock->less = 0;
+	stock->mode_cb = 0;
 	return (1);
 }
 
@@ -96,14 +106,14 @@ int		main(int argc, char **argv)
 		return (1);
 	if (argc >= 1)
 	{
-		while (argv[i] && argv[i][0] == '-')
+		while (argv[i] && argv[i][0] == '-' && stock.less == 0)
 		{
 			if (!checkargs(argv[i], &stock))
 				return (1);
 			i++;
 		}
 	}
-	if (!(argv[i]))
+	if (!(argv[i]) && stock.less == 0)
 		if (!args_or_not(&stock, &infos, 0))
 			return (free_elems(&infos));
 	if (argv[i] && (!multiple_args(argv, &stock, &infos, i)))

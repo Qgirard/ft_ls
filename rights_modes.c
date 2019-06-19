@@ -6,17 +6,19 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 18:18:46 by qgirard           #+#    #+#             */
-/*   Updated: 2019/05/09 17:28:17 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 03:03:22 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	nodes(char *str)
+void	nodes(char *str, t_info *stock)
 {
 	struct stat	tmp;
 
 	stat(str, &tmp);
+	if (S_ISBLK(tmp.st_mode) || S_ISCHR(tmp.st_mode))
+		stock->mode_cb = 1;
 	S_ISDIR(tmp.st_mode) ? ft_printf("d") : 0;
 	S_ISREG(tmp.st_mode) ? ft_printf("-") : 0;
 	S_ISLNK(tmp.st_mode) ? ft_printf("l") : 0;
@@ -35,8 +37,8 @@ void	nodes(char *str)
 	ft_printf((tmp.st_mode & S_IXOTH) ? "x" : "-");
 }
 
-int		rights_modes(char *str)
+int		rights_modes(char *str, t_info *stock)
 {
-	nodes(str);
+	nodes(str, stock);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:20:33 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 00:31:53 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 03:11:18 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int		l_option(t_info *stock, t_elem **ptr)
 			(stock->a) ? a_option(ptr, 1) : a_option(ptr, 0);
 		else
 		{
-			((*ptr)->name_dir) ? rights_modes(path)
-			: rights_modes((*ptr)->name);
-			((*ptr)->name_dir) ? get_uid_gid(path) : get_uid_gid((*ptr)->name);
+			((*ptr)->name_dir) ? rights_modes(path, stock)
+			: rights_modes((*ptr)->name, stock);
+			((*ptr)->name_dir) ? get_uid_gid(path, stock)
+			: get_uid_gid((*ptr)->name, stock);
 			print_timestamp(ret);
 			ft_printf(" ");
 			(stock->a) ? a_option(ptr, 1) : a_option(ptr, 0);
