@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:00:09 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 03:44:42 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 06:09:46 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct		s_info
 	int				r;
 	int				t;
 	int				j;
-	int				mode_cb;
 }					t_info;
 
 typedef struct		s_elem
@@ -54,8 +53,8 @@ int					stockinfos(t_info *stock, int i);
 int					a_option(t_elem **ptr, int i);
 int					l_option(t_info *stock, t_elem **ptr);
 int					ft_ls(t_info *stock, t_elem **infos);
-int					rights_modes(char *str, t_info *stock);
-int					get_uid_gid(char *str, t_info *stock);
+int					rights_modes(char *str);
+int					get_uid_gid(char *str);
 char				*usage_false_dir(char *str);
 int					sort_in_ascii(t_elem **infos, t_info *stock, int var);
 int					list_with_name(t_elem **infos, char *str, int point,

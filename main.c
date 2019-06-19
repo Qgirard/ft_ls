@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 13:59:49 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 05:02:40 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 22:06:16 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		checkargs(char *str, t_info *stock)
 	i = 1;
 	if (str[0] == '-' && str[1])
 	{
-		if (str[1] == '-')
+		if (str[1] == '-' && !str[2])
 			return (1);
 		while (str[i])
 		{
@@ -46,7 +46,6 @@ int		initializeinfos(t_info *stock)
 	stock->t = 0;
 	stock->j = 0;
 	stock->less = 0;
-	stock->mode_cb = 0;
 	return (1);
 }
 

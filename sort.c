@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:14:37 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/14 04:46:48 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 22:41:41 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int		elems_sorted(t_elem **ptr)
 	while (*ptr && (*ptr)->next)
 	{
 		if ((ft_strcmp((*ptr)->name, (*ptr)->next->name) > 0
-		&& (*ptr)->in_dir == (*ptr)->next->in_dir && (*ptr)->type != 1)
-		|| ((*ptr)->in_dir > (*ptr)->next->in_dir))
+		&& (*ptr)->in_dir == (*ptr)->next->in_dir && (*ptr)->type != 1
+		&& (*ptr)->type != -1) || ((*ptr)->in_dir > (*ptr)->next->in_dir))
 			return (1);
 		(*ptr) = (*ptr)->next;
 	}
@@ -70,8 +70,8 @@ int		sort_in_ascii(t_elem **infos, t_info *stock, int var)
 		while (ptr && ptr->next)
 		{
 			if (ptr && ptr->next && ((ft_strcmp(ptr->name, ptr->next->name) > 0
-			&& ptr->in_dir == ptr->next->in_dir && ptr->type != 1)
-			|| ptr->in_dir > ptr->next->in_dir))
+			&& ptr->in_dir == ptr->next->in_dir && ptr->type != 1
+			&& ptr->type != -1) || ptr->in_dir > ptr->next->in_dir))
 			{
 				ft_swap(&(ptr->type), &(ptr->next->type));
 				ft_swap(&(ptr->in_dir), &(ptr->next->in_dir));

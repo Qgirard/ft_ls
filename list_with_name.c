@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 14:23:54 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/14 00:11:10 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 22:48:12 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		initialize_name_dir(t_elem **new, t_elem *tmp, int var, int dir)
 {
 	if (dir > 0)
 	{
-		if (var == 1 || var == 2)
+		if (var == 1 || var == -1)
 		{
 			if (!((*new)->name_dir = ft_strdup((*new)->name)))
 				return (0);
@@ -83,7 +83,7 @@ int		stock_dirs(t_elem **infos, char *str, int args, int *dir)
 		if (!(create_list(infos, str, 1, *dir)))
 			return (0);
 	if (args == 1)
-		if (!(create_list(infos, str, 2, *dir)))
+		if (!(create_list(infos, str, -1, *dir)))
 			return (0);
 	return (1);
 }
