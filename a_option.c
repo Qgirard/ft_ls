@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:54:48 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 22:27:14 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 22:54:14 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ int		a_option(t_elem **ptr, int i)
 		if (i == 1 || (i == 0 && ft_strncmp((*ptr)->name, ".", 1)))
 			ft_printf("{rose}%s\n", (*ptr)->name);
 	}
-	// else if ((*ptr)->type == 8 || (*ptr)->type == 2)
-	// {
-	// 	if (i == 1 || (i == 0 && ft_strncmp((*ptr)->name, ".", 1)))
-	// 		ft_printf("%s\n", (*ptr)->name);
-	// }
 	else if ((*ptr)->type == 4)
 	{
 		if (i == 1 || (i == 0 && ft_strncmp((*ptr)->name, ".", 1)))

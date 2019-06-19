@@ -6,13 +6,13 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:46:16 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 06:29:01 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/19 23:42:37 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		get_uid_gid(char *str)
+int		get_uid_gid(char *str, t_elem **ptr)
 {
 	struct stat		buf;
 	struct passwd	*pass;
@@ -30,9 +30,10 @@ int		get_uid_gid(char *str)
 			else
 				ft_printf(" %u", buf.st_uid);
 			ft_printf("  %s ", temp->gr_name);
-			// if (stock->mode_cb == 1)
-			// 	ft_printf("%6u", buf.st_rdev);
-			ft_printf("%6lld ", buf.st_size);
+			if ((*ptr)->type == 2 || (*ptr)->type == 6)
+				ft_printf("%7u, %u ", major(buf.st_rdev), minor(buf.st_rdev));
+			else
+				ft_printf("%6lld ", buf.st_size);
 			return (1);
 		}
 	}
