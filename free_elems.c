@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 14:38:39 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/13 06:07:04 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/20 07:18:22 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		free_elems(t_elem **infos)
 {
 	t_elem	*tmp;
 
+	tmp = NULL;
 	while (*infos)
 	{
 		tmp = (*infos);

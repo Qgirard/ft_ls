@@ -6,7 +6,7 @@
 #    By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 16:35:29 by qgirard           #+#    #+#              #
-#    Updated: 2019/06/19 00:04:22 by qgirard          ###   ########.fr        #
+#    Updated: 2019/06/20 07:17:32 by qgirard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIB = libft/libft.a
 HEADER = ft_ls.h
 
 CC = gcc -o
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 #-g3 -fsanitize=address
 
 SRC = ft_ls.c main.c stockinfos.c a_option.c usage.c l_option.c rights_modes.c \
