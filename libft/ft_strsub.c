@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 13:29:47 by qgirard           #+#    #+#             */
-/*   Updated: 2019/01/18 17:13:39 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/20 22:46:36 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		i++;
 	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
 		return (NULL);
-	while (j < len)
+	while (tmp[i] && j < len)
 	{
 		str[j] = tmp[i];
 		j++;

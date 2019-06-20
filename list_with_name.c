@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 14:23:54 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/20 09:01:21 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/20 22:41:20 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		initialize_name_dir(t_elem **new, t_elem *tmp, int var, int dir)
 			if (!((*new)->name_dir = ft_strdup(tmp->name_dir)))
 				return (0);
 		}
+		else
+			(*new)->name_dir = NULL;
 	}
 	else
 		(*new)->name_dir = NULL;
@@ -98,8 +100,8 @@ int		list_with_name(t_elem **infos, char *str, int point, int args)
 
 	tmp = NULL;
 	buf = NULL;
-	/*if (!(*infos))
-		dir = 0;*/
+	if (!(*infos))
+		dir = 0;
 	if (!(tmp = opendir(str)))
 		list_with_file(infos, str);
 	else
