@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 13:59:49 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 22:06:16 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/20 05:02:54 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,6 @@ int		args_or_not(t_info *stock, t_elem **infos, int i)
 
 int		multiple_args(char **argv, t_info *stock, t_elem **infos, int i)
 {
-	/*if (stock->r)
-		(stock->t) ? sort_args_time_rev(argv, i) : sort_args_reverse(argv, i);
-	else
-		(stock->t) ? sort_args_time(argv, i) : sort_args(argv, i);*/
 	sort_args(argv, i);
 	while (argv[i])
 	{

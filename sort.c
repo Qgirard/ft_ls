@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 15:14:37 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 22:41:41 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/20 05:04:14 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,16 @@ int		sort_in_ascii(t_elem **infos, t_info *stock, int var)
 	return (1);
 }
 
-int 	sort_time(t_elem **ptr)
+int		sort_time(t_elem **ptr)
 {
 	t_elem	*tmp;
-	char 	*name;
+	char	*name;
 
 	name = NULL;
 	tmp = (*ptr);
-	while(tmp && tmp->next)
+	while (tmp && tmp->next)
 	{
-		if(tmp && tmp->next
+		if (tmp && tmp->next
 		&& get_timestamp(tmp->name) < get_timestamp(tmp->next->name))
 		{
 			name = tmp->name;
@@ -105,5 +105,5 @@ int 	sort_time(t_elem **ptr)
 		tmp = tmp->next;
 	}
 	tmp = (*ptr);
-	return(1);
+	return (1);
 }

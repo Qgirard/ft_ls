@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 14:23:54 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 22:48:12 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/20 05:14:41 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		initialize_name_dir(t_elem **new, t_elem *tmp, int var, int dir)
 	}
 	else
 		(*new)->name_dir = NULL;
+	(*new)->type = var;
 	return (1);
 }
 
@@ -44,7 +45,6 @@ int		create_list(t_elem **infos, char *str, int var, int dir)
 		return (0);
 	if (!initialize_name_dir(&new, tmp, var, dir))
 		return (0);
-	new->type = var;
 	new->in_dir = dir;
 	new->next = NULL;
 	if (!(*infos))
