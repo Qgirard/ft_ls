@@ -6,7 +6,7 @@
 #    By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 16:35:29 by qgirard           #+#    #+#              #
-#    Updated: 2019/06/20 07:17:32 by qgirard          ###   ########.fr        #
+#    Updated: 2019/06/20 23:16:10 by qgirard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ CFLAGS = -g -Wall -Wextra -Werror
 
 SRC = ft_ls.c main.c stockinfos.c a_option.c usage.c l_option.c rights_modes.c \
 		get_uid_gid.c sort.c list_with_name.c free_elems.c sort_args.c \
-		sort_args_reverse.c sort_args_time.c sort_args_time_rev.c
+		sort_args_reverse.c sort_args_time.c sort_args_time_rev.c \
+		stock_majr.c
 
 OBJ = $(SRC:.c=.o)
 

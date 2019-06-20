@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   stock_majr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/22 13:52:02 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/20 22:51:55 by qgirard          ###   ########.fr       */
+/*   Created: 2019/06/20 22:59:10 by qgirard           #+#    #+#             */
+/*   Updated: 2019/06/21 00:17:38 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_ls(t_info *stock, t_elem **infos)
+int		stock_majr(t_elem **infos, t_info *stock)
 {
 	t_elem	*tmp;
+	char	*buf;
 
 	tmp = (*infos);
-	if (stock->r)
-	{
-		while (tmp && tmp->next)
-			tmp = tmp->next;
-	}
+	buf = NULL;
 	while (tmp)
 	{
-		if (stock->a == 0 && stock->l == 0)
-			a_option(&tmp, 0);
-		else if (stock->l)
-			l_option(stock, &tmp);
-		else if (stock->a)
-			a_option(&tmp, 1);
-		tmp = (stock->r) ? tmp->prev : tmp->next;
+		if (tmp->type == 4 && ft_strcmp(".", tmp->name)
+		&& ft_strcmp("..", tmp->name))
+		{
+			buf = (tmp->name_dir) ? ft_strjoin(tmp->name_dir, "/")
+			: ft_strjoin(".", "/");
+			buf = ft_strjoinf(buf, tmp->name, 1);
+			if (stock->a)
+				if (!list_with_name(infos, buf, 1, 2))
+					return (0);
+			if (!stock->a)
+				if (!list_with_name(infos, buf, 0, 2))
+					return (0);
+			ft_strdel(&buf);
+		}
+		tmp = tmp->next;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:00:09 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/19 22:56:00 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/20 23:16:00 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ long 				get_timestamp(char *dir);
 void 				print_timestamp(long timestamp);
 int 				sort_time(t_elem **ptr);
 int					stockinfos(t_info *stock, int i);
+int					stock_majr(t_elem **infos, t_info *stock);
 int					a_option(t_elem **ptr, int i);
 int					l_option(t_info *stock, t_elem **ptr);
 int					ft_ls(t_info *stock, t_elem **infos);

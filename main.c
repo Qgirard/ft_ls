@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 13:59:49 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/20 05:02:54 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/21 00:17:09 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ int		args_or_not(t_info *stock, t_elem **infos, int i)
 			if (!list_with_name(infos, ".", 0, 0))
 				return (0);
 		sort_in_ascii(infos, stock, 0);
+		if (stock->majr)
+			if (!(stock_majr(infos, stock)))
+				return (0);
+		sort_in_ascii(infos, stock, 0);
 		ft_ls(stock, infos);
 	}
 	return (1);
@@ -84,6 +88,10 @@ int		multiple_args(char **argv, t_info *stock, t_elem **infos, int i)
 				return (0);
 		i++;
 	}
+	sort_in_ascii(infos, stock, 1);
+	if (stock->majr)
+		if (!(stock_majr(infos, stock)))
+			return (0);
 	sort_in_ascii(infos, stock, 1);
 	ft_ls(stock, infos);
 	return (1);
