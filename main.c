@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 13:59:49 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/21 00:17:09 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/21 04:54:10 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		initializeinfos(t_info *stock)
 	stock->t = 0;
 	stock->j = 0;
 	stock->less = 0;
+	stock->dir = 0;
 	return (1);
 }
 
@@ -61,7 +62,7 @@ int		args_or_not(t_info *stock, t_elem **infos, int i)
 				return (0);
 		sort_in_ascii(infos, stock, 0);
 		if (stock->majr)
-			if (!(stock_majr(infos, stock)))
+			if (!(stock_majr(infos, stock, NULL)))
 				return (0);
 		sort_in_ascii(infos, stock, 0);
 		ft_ls(stock, infos);
@@ -90,9 +91,9 @@ int		multiple_args(char **argv, t_info *stock, t_elem **infos, int i)
 	}
 	sort_in_ascii(infos, stock, 1);
 	if (stock->majr)
-		if (!(stock_majr(infos, stock)))
+		if (!(stock_majr(infos, stock, NULL)))
 			return (0);
-	sort_in_ascii(infos, stock, 1);
+	sort_in_ascii(infos, stock, 0);
 	ft_ls(stock, infos);
 	return (1);
 }
