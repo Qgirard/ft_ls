@@ -6,24 +6,25 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 22:59:10 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/21 07:45:39 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/25 07:16:31 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		initialize_name_test(t_elem **new, t_elem **infos, int var, int dir)
+int		initialize_dirs_majr(t_elem **new, t_elem *tmp, int var, t_info *stock)
 {
-	if (dir > 0)
+	ft_printf("TMP_NAME_DIR %s    TMP_NAME %s\n", tmp->name_dir, tmp->name);
+	if (stock->dir > 0)
 	{
 		if (var == 1 || var == -1)
 		{
 			if (!((*new)->name_dir = ft_strdup((*new)->name)))
 				return (0);
 		}
-		else if ((*infos) && (*infos)->name_dir)
+		else if (tmp && tmp->name_dir)
 		{
-			if (!((*new)->name_dir = ft_strdup((*infos)->name_dir)))
+			if (!((*new)->name_dir = ft_strdup(tmp->name_dir)))
 				return (0);
 		}
 		else
@@ -35,88 +36,81 @@ int		initialize_name_test(t_elem **new, t_elem **infos, int var, int dir)
 	return (1);
 }
 
-int		create_test(t_elem **infos, char *str, int var, t_info *stock)
+int		create_majr(t_elem **infos, char *str, int var, t_info *stock)
 {
 	t_elem	*tmp;
 	t_elem	*new;
+	t_elem	*ptr;
 
 	tmp = (*infos);
-	tmp = ((*infos) && tmp->next) ? tmp->next : NULL;
+	ptr = ((*infos) && (*infos)->next) ? (*infos)->next : NULL;
 	if (!(new = (t_elem *)malloc(sizeof(t_elem))))
 		return (0);
 	if (!(new->name = ft_strdup(str)))
 		return (0);
-	if (!initialize_name_test(&new, (stock->j > 0) ? infos : &tmp, var, stock->dir))
+	if (!initialize_dirs_majr(&new, tmp, var, stock))
 		return (0);
-	new->in_dir = stock->dir + 1;
+	new->in_dir = stock->dir;
 	new->next = NULL;
-	if (!(*infos))
+	if (ptr)
 	{
-		new->prev = NULL;
-		(*infos) = new;
+		ptr->prev = new;
+		new->next = ptr;
 	}
-	else
-	{
-		new->prev = (*infos);
-		(*infos)->next = new;
-		new->next = tmp;
-		if (tmp)
-			tmp->prev = new;
-	}
+	new->prev = tmp;
+	tmp->next = new;
 	return (1);
 }
 
-int		list_with_test(t_elem **infos, char *str, t_info *stock)
+int		stock_dirs_majr(t_elem **infos, char *str, int args, t_info *stock)
 {
-	struct stat temp;
-
-	stat(str, &temp);
-	if (S_ISREG(temp.st_mode))
-	{
-		if (!(create_test(infos, str, 8, stock)))
-			return (0);
-		temp.st_mode = 0;
-	}
-	else
-		ft_printf("%s\n", usage_false_dir(str));
-	return (1);
-}
-
-int		stock_test(t_elem **infos, char *str, int args, t_info *stock)
-{
-	stock->dir++;
 	if (args > 1)
-		if (!(create_test(infos, str, 1, stock)))
+		if (!(create_majr(infos, str, 1, stock)))
 			return (0);
 	if (args == 1)
-		if (!(create_test(infos, str, -1, stock)))
+		if (!(create_majr(infos, str, -1, stock)))
 			return (0);
 	return (1);
 }
 
-int		list_test(t_elem **infos, char *str, int point, t_info *stock)
+int		list_majr(t_elem **infos, char *str, int point, t_info *stock)
 {
 	DIR				*tmp;
 	struct dirent	*buf;
 	t_elem			*ptr;
+	t_elem			*temp;
 
 	tmp = NULL;
 	buf = NULL;
 	ptr = (*infos);
-	if (stock->dir == 0)
-		stock->dir = (stock->j > 2) ? stock->j : 2;
+	temp = (*infos);
 	if (!(tmp = opendir(str)))
-		list_with_test(&ptr, str, stock);
+	{
+		ft_putendl("ERROR");
+		return (0);
+	}
 	else
 	{
-		if (!(stock_test(&ptr, str, 2, stock)))
+		stock->dir = (*infos)->prev->in_dir + 1;
+		while (temp)
+		{
+			while (temp && temp->next && temp->in_dir == temp->next->in_dir)
+				temp = temp->next;
+			temp = (temp->next) ? temp->next : NULL;
+			while (temp)
+			{
+				temp->in_dir++;
+				temp = temp->next;
+			}
+		}
+		if (!(stock_dirs_majr(infos, str, 2, stock)))
 			return (0);
 		while ((buf = readdir(tmp)) != NULL)
 		{
-			if (ptr->next && stock->j > 0)
+			if (ptr->next)
 				ptr = ptr->next;
 			if (point == 1 || (ft_strncmp(buf->d_name, ".", 1) && point == 0))
-				if (!(create_test(&ptr, buf->d_name, buf->d_type, stock)))
+				if (!(create_majr(&ptr, buf->d_name, buf->d_type, stock)))
 					return (0);
 		}
 		closedir(tmp);
@@ -140,10 +134,10 @@ int		stock_majr(t_elem **infos, t_info *stock, char *str)
 			: ft_strjoin(".", "/");
 			buf = ft_strjoinf(buf, tmp->name, 1);
 			if (stock->a)
-				if (!list_test(&tmp, buf, 1, stock))
+				if (!list_majr(&tmp, buf, 1, stock))
 					return (0);
 			if (!stock->a)
-				if (!list_test(&tmp, buf, 0, stock))
+				if (!list_majr(&tmp, buf, 0, stock))
 					return (0);
 			ft_strdel(&buf);
 		}
