@@ -31,18 +31,3 @@ int		stockinfos(t_info *stock, int i)
 	}
 	return (1);
 }
-/*
-
-void 	print_block(t_elem **ptr, t_info *stock, int size)
-{
-	int ret;
-
-	ret = 0;
-	while(i < size)
-	{
-		if (!(opt->a) && ptr[ret]->name[0] == ".")
-			ret += (*ptr)->blocks;
-	}
-	ft_printf("total %d", ret);
-}
-*/

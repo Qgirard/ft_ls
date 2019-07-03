@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 22:59:10 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/25 07:16:31 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/26 00:32:17 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int		initialize_dirs_majr(t_elem **new, t_elem *tmp, int var, t_info *stock)
 {
-	ft_printf("TMP_NAME_DIR %s    TMP_NAME %s\n", tmp->name_dir, tmp->name);
-	if (stock->dir > 0)
+	if (stock->dir)
 	{
 		if (var == 1 || var == -1)
 		{
@@ -59,6 +58,7 @@ int		create_majr(t_elem **infos, char *str, int var, t_info *stock)
 	}
 	new->prev = tmp;
 	tmp->next = new;
+	(*infos) = (*infos)->next;
 	return (1);
 }
 
@@ -91,10 +91,11 @@ int		list_majr(t_elem **infos, char *str, int point, t_info *stock)
 	}
 	else
 	{
-		stock->dir = (*infos)->prev->in_dir + 1;
+		stock->dir = (stock->dir) ? stock->dir + 1 : (*infos)->prev->in_dir + 1;
 		while (temp)
 		{
-			while (temp && temp->next && temp->in_dir == temp->next->in_dir)
+			while (temp && temp->next && (temp->in_dir == temp->next->in_dir
+			|| temp->in_dir > temp->next->in_dir))
 				temp = temp->next;
 			temp = (temp->next) ? temp->next : NULL;
 			while (temp)
@@ -103,12 +104,10 @@ int		list_majr(t_elem **infos, char *str, int point, t_info *stock)
 				temp = temp->next;
 			}
 		}
-		if (!(stock_dirs_majr(infos, str, 2, stock)))
+		if (!(stock_dirs_majr(&ptr, str, 2, stock)))
 			return (0);
 		while ((buf = readdir(tmp)) != NULL)
 		{
-			if (ptr->next)
-				ptr = ptr->next;
 			if (point == 1 || (ft_strncmp(buf->d_name, ".", 1) && point == 0))
 				if (!(create_majr(&ptr, buf->d_name, buf->d_type, stock)))
 					return (0);

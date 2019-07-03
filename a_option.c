@@ -6,7 +6,7 @@
 /*   By: qgirard <qgirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:54:48 by qgirard           #+#    #+#             */
-/*   Updated: 2019/06/25 03:36:22 by qgirard          ###   ########.fr       */
+/*   Updated: 2019/06/26 00:26:28 by qgirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		a_option(t_elem **ptr, int i)
 {
+	ft_printf("IN_DIR %d\n", (*ptr)->in_dir);
 	if ((*ptr)->type == 10)
 	{
 		if (i == 1 || (i == 0 && ft_strncmp((*ptr)->name, ".", 1)))
@@ -29,9 +30,9 @@ int		a_option(t_elem **ptr, int i)
 		if (i == 1 || (i == 0 && ft_strncmp((*ptr)->name, ".", 1)))
 			ft_printf("%s\n", (*ptr)->name);
 	}
-	if ((*ptr) && (*ptr)->next && (*ptr)->in_dir < (*ptr)->next->in_dir)
-		ft_putchar('\n');
 	if ((*ptr)->type == 1)
 		ft_printf("%s:\n", (*ptr)->name);
+	if ((*ptr) && (*ptr)->next && (*ptr)->in_dir < (*ptr)->next->in_dir)
+		ft_putchar('\n');
 	return (0);
 }

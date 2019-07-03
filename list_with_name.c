@@ -86,7 +86,7 @@ int		stock_dirs(t_elem **infos, char *str, int args, int *dir)
 	if (args > 1)
 		if (!(create_list(infos, str, 1, *dir)))
 			return (0);
-	if (args == 1)
+	if (args <= 1)
 		if (!(create_list(infos, str, -1, *dir)))
 			return (0);
 	return (1);
